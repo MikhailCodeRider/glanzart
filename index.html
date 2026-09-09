@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>glanz.art — скоро будет</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:ital@1&display=swap');
+
+  :root{
+    --bg1:#ffe3f3;
+    --bg2:#e6dcff;
+    --bg3:#dff3ff;
+    --ink:#4a2b63;
+    --glow:#ffffff;
+    --pink:#ff8fd1;
+    --violet:#b083ff;
+    --gold:#ffd76b;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    height:100%;
+    overflow:hidden;
+  }
+
+  body{
+    font-family:'Quicksand', sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 20% 20%, var(--bg1), transparent 55%),
+      radial-gradient(circle at 80% 30%, var(--bg3), transparent 55%),
+      radial-gradient(circle at 50% 90%, var(--bg2), transparent 60%),
+      linear-gradient(135deg, #ffe9f7, #ece2ff 45%, #e3f4ff);
+    background-size:200% 200%;
+    animation: drift 18s ease-in-out infinite;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+  @keyframes drift{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+  }
+
+  /* sparkle field */
+  .sparkles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+  }
+  .sparkle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:radial-gradient(circle, #fff 0%, rgba(255,255,255,0) 70%);
+    border-radius:50%;
+    opacity:0;
+    animation-name: twinkle, floatUp;
+    animation-timing-function: ease-in-out, linear;
+    animation-iteration-count: infinite, infinite;
+  }
+  .sparkle::after{
+    content:"✦";
+    position:absolute;
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+    font-size:10px;
+    color:#fff;
+    text-shadow:0 0 6px #fff, 0 0 12px var(--gold);
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:0; transform:scale(0.4); }
+    50%{ opacity:1; transform:scale(1.1); }
+  }
+  @keyframes floatUp{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-40px); }
+  }
+
+  .card{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding: 3rem 2.5rem;
+    max-width:560px;
+  }
+
+  .unicorn{
+    width:150px;
+    height:150px;
+    margin:0 auto 1rem;
+    filter: drop-shadow(0 10px 25px rgba(176, 131, 255, 0.45));
+    animation: bob 4s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0) rotate(-1deg); }
+    50%{ transform: translateY(-14px) rotate(1deg); }
+  }
+
+  .mane-stop-1{ stop-color:#ff8fd1; }
+  .mane-stop-2{ stop-color:#b083ff; }
+  .mane-stop-3{ stop-color:#8fd1ff; }
+  .horn-stop-1{ stop-color:#ffe9a8; }
+  .horn-stop-2{ stop-color:#ffbf6b; }
+
+  h1.brand{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    margin: 0.2em 0 0.1em;
+    letter-spacing: 0.02em;
+    background: linear-gradient(90deg, var(--violet), var(--pink) 35%, var(--gold) 60%, var(--violet));
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 5s linear infinite;
+  }
+  @keyframes shine{
+    to{ background-position: 300% center; }
+  }
+
+  .tagline{
+    font-size: 1.15rem;
+    font-weight:600;
+    color: var(--ink);
+    opacity:0.85;
+    margin: 0.4em 0 1.4em;
+  }
+
+  .soon-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5em;
+    padding: 0.6em 1.4em;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 8px 24px rgba(176,131,255,0.25);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--violet);
+  }
+
+  .soon-badge .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background: var(--pink);
+    box-shadow: 0 0 10px var(--pink), 0 0 20px var(--pink);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ transform:scale(1); opacity:1; }
+    50%{ transform:scale(1.6); opacity:0.5; }
+  }
+
+  footer{
+    position:fixed;
+    bottom:1.4rem;
+    left:0; right:0;
+    text-align:center;
+    font-size:0.8rem;
+    color: var(--ink);
+    opacity:0.55;
+    z-index:2;
+  }
+</style>
+</head>
+<body>
+
+  <div class="sparkles" id="sparkles"></div>
+
+  <main class="card">
+    <svg class="unicorn" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="maneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" class="mane-stop-1"/>
+          <stop offset="50%" class="mane-stop-2"/>
+          <stop offset="100%" class="mane-stop-3"/>
+        </linearGradient>
+        <linearGradient id="hornGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" class="horn-stop-1"/>
+          <stop offset="100%" class="horn-stop-2"/>
+        </linearGradient>
+      </defs>
+
+      <!-- body -->
+      <ellipse cx="95" cy="140" rx="55" ry="34" fill="#ffffff" stroke="#e8d9ff" stroke-width="2"/>
+      <!-- legs -->
+      <rect x="60" y="160" width="10" height="28" rx="5" fill="#ffffff" stroke="#e8d9ff" stroke-width="2"/>
+      <rect x="120" y="160" width="10" height="28" rx="5" fill="#ffffff" stroke="#e8d9ff" stroke-width="2"/>
+      <rect x="75" y="166" width="10" height="24" rx="5" fill="#f6effe" stroke="#e8d9ff" stroke-width="2"/>
+      <rect x="108" y="166" width="10" height="24" rx="5" fill="#f6effe" stroke="#e8d9ff" stroke-width="2"/>
+
+      <!-- tail -->
+      <path d="M42 128 C18 118, 14 150, 30 168 C20 156, 24 138, 42 138" fill="url(#maneGrad)"/>
+
+      <!-- neck + head -->
+      <path d="M120 110 C140 95, 150 65, 140 40 C160 55, 168 88, 150 118 C144 128, 128 130, 120 122 Z" fill="#ffffff" stroke="#e8d9ff" stroke-width="2"/>
+
+      <!-- horn -->
+      <polygon points="142,40 148,10 156,42" fill="url(#hornGrad)" stroke="#f5b34d" stroke-width="1"/>
+
+      <!-- ear -->
+      <polygon points="122,48 130,32 136,50" fill="#ffe3f3"/>
+
+      <!-- mane -->
+      <path d="M118 42 C108 55, 108 80, 122 100 C112 82, 118 60, 130 46 Z" fill="url(#maneGrad)"/>
+      <path d="M126 60 C114 74, 114 96, 128 116 C118 98, 124 78, 136 64 Z" fill="url(#maneGrad)" opacity="0.85"/>
+      <path d="M132 82 C122 94, 124 112, 136 128 C128 112, 132 96, 142 86 Z" fill="url(#maneGrad)" opacity="0.7"/>
+
+      <!-- eye + cheek -->
+      <circle cx="144" cy="66" r="3.4" fill="#4a2b63"/>
+      <circle cx="150" cy="76" r="4" fill="#ffc2e0" opacity="0.7"/>
+    </svg>
+
+    <div class="soon-badge"><span class="dot"></span> Скоро будет</div>
+    <h1 class="brand">glanz.art</h1>
+    <p class="tagline">Немного магии уже в пути ✨</p>
+  </main>
+
+  <footer>glanz.art</footer>
+
+<script>
+  const field = document.getElementById('sparkles');
+  const N = 45;
+  for (let i = 0; i < N; i++) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    const dur1 = (2 + Math.random() * 3).toFixed(2);
+    const dur2 = (6 + Math.random() * 6).toFixed(2);
+    const delay1 = (Math.random() * 4).toFixed(2);
+    const delay2 = (Math.random() * 6).toFixed(2);
+    const scale = 0.6 + Math.random() * 1.4;
+    s.style.transform = `scale(${scale})`;
+    s.style.animationDuration = `${dur1}s, ${dur2}s`;
+    s.style.animationDelay = `${delay1}s, ${delay2}s`;
+    field.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
